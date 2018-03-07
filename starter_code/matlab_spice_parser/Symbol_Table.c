@@ -37,6 +37,10 @@ int DeviceTableSize;
 
 void Init_Symbol_Tables()
 {
+	NodeTable = malloc(sizeof(Node_Entry*));
+	DeviceTable = malloc(sizeof(Device_Entry*));
+	NodeTableSize = 0;
+	DeviceTableSize = 0;
 }
 
 
@@ -45,7 +49,6 @@ void Destroy_Symbol_Table()
 	Delete_Node_Table();
 	Delete_Device_Table();
 }
-
 
 void Delete_Node_Table()
 {
@@ -78,14 +81,30 @@ Device_Entry* Lookup_Device_Entry(const char *name)
 
 Node_Entry* Insert_Node_Entry(const char *name)
 {
-	return NULL;
+	//init
+	Node_Entry* new_node = malloc(sizeof(Device_Entry));
+
+	//setting up values
+	new_node->name = name;
+	
+	return new_node;
 }
 
 
 Device_Entry* Insert_Device_Entry(const char *name,  const int numnodes, 
 				Node_Entry **nodelist, const double value)
 {
-	return NULL;
+	//init
+	Device_Entry* new_device = malloc(sizeof(Device_Entry));
+
+	//setting up values
+	new_device->name = name;
+	new_device->numnodes = numnodes;
+	new_device->nodelist = nodelist;
+	new_device->device = NULL;
+	new_device->value = value;
+
+	return new_device;
 }
 
 

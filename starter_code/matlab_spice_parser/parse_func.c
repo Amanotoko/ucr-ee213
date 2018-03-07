@@ -38,92 +38,82 @@ void Init_parse_util()
 
 void ParseRes(char *name, char *node1, char *node2, double value)
 {
-	int numnodes;
+	int numnodes = 2;
 	Node_Entry **nodelist;
 	
 	printf("[Resistor parsed ...]\n");
 	printf("   name=%s, node+=%s, node-=%s, R=%e\n", name, node1, node2, value);
 	nRes++;
 
-	// Save the device, nodes, value info to the symbol tables.
-	// Please write your own code here ...
+	nodelist = malloc(sizeof(Node_Entry*)*2);
+	nodelist[0] = Insert_Node_Entry(node1);
+	nodelist[1] = Insert_Node_Entry(node2);
+	Insert_Device_Entry(name,numnodes,nodelist,value);
 }
 
 void ParseCap(char *name, char *node1, char *node2, double value)
 {
-	int numnodes;
+	int numnodes = 2;
 	Node_Entry **nodelist;
 	
 	printf("[Capacitor parsed ...]\n");
 	printf("   name=%s, node+=%s, node-=%s, C=%e\n", name, node1, node2, value);
 	nCap++;
 
-	// Save the device, nodes, value info to the symbol tables.
-	// Please write your own code here ...
-}
-
-void ParseCapIC(char *name, char *node1, char *node2, double value, double init)
-{
-	printf("[Capacitor parsed ...]\n");
-	printf("   name=%s, node+=%s, node-=%s, C=%e, init=%e\n", name, node1, node2, value, init);
-	nCap++;
-
-	// Save the device, nodes, value info to the symbol tables.
-	// Please write your own code here ...
+	nodelist = malloc(sizeof(Node_Entry*)*2);
+	nodelist[0] = Insert_Node_Entry(node1);
+	nodelist[1] = Insert_Node_Entry(node2);
+	Insert_Device_Entry(name,numnodes,nodelist,value);
 }
 
 void ParseInd(char *name, char *node1, char *node2, double value)
 {
-	int numnodes;
+	int numnodes = 2;
 	Node_Entry **nodelist;
 	
 	printf("[Inductor parsed ...]\n");
 	printf("   name=%s, node+=%s, node-=%s, L=%e\n", name, node1, node2, value);
 	nInd++;
 
-	// Save the device, nodes, value info to the symbol tables.
-	// Please write your own code here ...
-}
-
-void ParseIndIC(char *name, char *node1, char *node2, double value, double init)
-{
-	printf("[Inductor parsed ...]\n");
-	printf("   name=%s, node+=%s, node-=%s, L=%e, init=%e\n", name, node1, node2, value, init);
-	nInd++;
-
-	// Save the device, nodes, value info to the symbol tables.
-	// Please write your own code here ...
+	nodelist = malloc(sizeof(Node_Entry*)*2);
+	nodelist[0] = Insert_Node_Entry(node1);
+	nodelist[1] = Insert_Node_Entry(node2);
+	Insert_Device_Entry(name,numnodes,nodelist,value);
 }
 
 void ParseVsrc(char *name, char *node1, char *node2, double value)
 {
-	int numnodes;
+	int numnodes = 2;
 	Node_Entry **nodelist;
 	
 	printf("[Voltage Source parsed ...]\n");
 	printf("   name=%s, node+=%s, node-=%s, V=%e\n", name, node1, node2, value);
 	nVsrc++;
 
-	// Save the device, nodes, value info to the symbol tables.
-	// Please write your own code here ...
+	nodelist = malloc(sizeof(Node_Entry*)*2);
+	nodelist[0] = Insert_Node_Entry(node1);
+	nodelist[1] = Insert_Node_Entry(node2);
+	Insert_Device_Entry(name,numnodes,nodelist,value);
 }
 
 void ParseIsrc(char *name, char *node1, char *node2, double value)
 {
-	int numnodes;
+	int numnodes = 2;
 	Node_Entry **nodelist;
 	
 	printf("[Current source parsed ...]\n");
 	printf("   name=%s, node+=%s, node-=%s, I=%e\n", name, node1, node2, value);
 	nIsrc++;
 
-	// Save the device, nodes, value info to the symbol tables.
-	// Please write your own code here ...
+	nodelist = malloc(sizeof(Node_Entry*)*2);
+	nodelist[0] = Insert_Node_Entry(node1);
+	nodelist[1] = Insert_Node_Entry(node2);
+	Insert_Device_Entry(name,numnodes,nodelist,value);
 }
 
 void ParseVCCS(char *name, char *node1, char *node2, char *node3, char *node4, double value)
 {
-	int numnodes;
+	int numnodes = 4;
 	Node_Entry **nodelist;
 	
 	printf("[VCCS parsed ...]\n");
@@ -131,8 +121,12 @@ void ParseVCCS(char *name, char *node1, char *node2, char *node3, char *node4, d
 			name, node1, node2, node3, node4, value);
 	nVCCS++;
 
-	// Save the device, nodes, value info to the symbol tables.
-	// Please write your own code here ...
+	nodelist = malloc(sizeof(Node_Entry*)*4);
+	nodelist[0] = Insert_Node_Entry(node1);
+	nodelist[1] = Insert_Node_Entry(node2);
+	nodelist[2] = Insert_Node_Entry(node3);
+	nodelist[3] = Insert_Node_Entry(node4);
+	Insert_Device_Entry(name,numnodes,nodelist,value);
 }
 
 
