@@ -81,19 +81,19 @@ void ParseInd(char *name, char *node1, char *node2, double value)
 	Insert_Device_Entry(name,numnodes,nodelist,value);
 }
 
-void ParseVsrc(char *name, char *node1, char *node2, double value)
-{
+void ParseVsrc(char *name, char *node1, char *node2, double value) {
 	int numnodes = 2;
 	Node_Entry **nodelist;
-	
+
 	printf("[Voltage Source parsed ...]\n");
 	printf("   name=%s, node+=%s, node-=%s, V=%e\n", name, node1, node2, value);
 	nVsrc++;
 
-	nodelist = malloc(sizeof(Node_Entry*)*2);
+	nodelist = malloc(sizeof(Node_Entry *) * 2);
 	nodelist[0] = Insert_Node_Entry(node1);
 	nodelist[1] = Insert_Node_Entry(node2);
-	Insert_Device_Entry(name,numnodes,nodelist,value);
+	Insert_Device_Entry(name, numnodes, nodelist, value);
+}
 
 void ParseIsrc(char *name, char *node1, char *node2, double value)
 {

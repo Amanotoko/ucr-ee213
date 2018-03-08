@@ -71,9 +71,9 @@ Node_Entry* Lookup_Node_Entry(const char *name)
 {
 	Node_Entry* pointer = *NodeTable;
 	while(pointer!=NULL){
-		if(pointer->name==*name){
-			return pointer;
-		}
+		//if(pointer->name==*name){
+		//	return pointer;
+		//}
 		pointer = pointer->next;
 	}
 	return NULL;
@@ -84,9 +84,9 @@ Device_Entry* Lookup_Device_Entry(const char *name)
 {
 	Device_Entry* pointer = *DeviceTable;
 	while(pointer!=NULL){
-		if(pointer->name==*name){
-			return pointer;
-		}
+		//if(pointer->name==*name){
+		//	return pointer;
+		//}
 		pointer = pointer->next;
 	}
 	return NULL;
@@ -137,7 +137,6 @@ void Print_Node_Table()
 		printf("hello");
 		pointer = pointer->next;
 	}
-	return NULL;
 }
 
 
@@ -145,9 +144,7 @@ void Print_Device_Table()
 {
 	Device_Entry* pointer = *DeviceTable;
 	while(pointer!=NULL){
-		if(pointer->name==*name){
-			return pointer;
-		}
+		printf("hi");
 		pointer = pointer->next;
 	}
 }
