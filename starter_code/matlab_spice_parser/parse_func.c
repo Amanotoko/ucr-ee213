@@ -94,7 +94,6 @@ void ParseVsrc(char *name, char *node1, char *node2, double value)
 	nodelist[0] = Insert_Node_Entry(node1);
 	nodelist[1] = Insert_Node_Entry(node2);
 	Insert_Device_Entry(name,numnodes,nodelist,value);
-}
 
 void ParseIsrc(char *name, char *node1, char *node2, double value)
 {

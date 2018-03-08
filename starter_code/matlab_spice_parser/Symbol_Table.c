@@ -69,12 +69,26 @@ void Delete_Device_Entry(const char *name)
 
 Node_Entry* Lookup_Node_Entry(const char *name)
 {
-	return  NULL;
+	Node_Entry* pointer = *NodeTable;
+	while(pointer!=NULL){
+		if(pointer->name==*name){
+			return pointer;
+		}
+		pointer = pointer->next;
+	}
+	return NULL;
 }
 
 
 Device_Entry* Lookup_Device_Entry(const char *name)
 {
+	Device_Entry* pointer = *DeviceTable;
+	while(pointer!=NULL){
+		if(pointer->name==*name){
+			return pointer;
+		}
+		pointer = pointer->next;
+	}
 	return NULL;
 }
 
@@ -84,9 +98,13 @@ Node_Entry* Insert_Node_Entry(const char *name)
 	//init
 	Node_Entry* new_node = malloc(sizeof(Device_Entry));
 
-	//setting up values
 	new_node->name = name;
-	
+
+	//first insert new_node and then set the head to new_node
+	new_node->next = *NodeTable;
+	*NodeTable = new_node;
+	NodeTableSize = NodeTableSize+1;
+
 	return new_node;
 }
 
@@ -97,12 +115,16 @@ Device_Entry* Insert_Device_Entry(const char *name,  const int numnodes,
 	//init
 	Device_Entry* new_device = malloc(sizeof(Device_Entry));
 
-	//setting up values
 	new_device->name = name;
 	new_device->numnodes = numnodes;
 	new_device->nodelist = nodelist;
 	new_device->device = NULL;
 	new_device->value = value;
+
+	//first insert new_device and then set the head to new_device
+	new_device->next = *DeviceTable;
+	*DeviceTable = new_device;
+	DeviceTableSize = DeviceTableSize+1;
 
 	return new_device;
 }
@@ -110,11 +132,24 @@ Device_Entry* Insert_Device_Entry(const char *name,  const int numnodes,
 
 void Print_Node_Table()
 {
+	Node_Entry* pointer = *NodeTable;
+	while(pointer!=NULL){
+		printf("hello");
+		pointer = pointer->next;
+	}
+	return NULL;
 }
 
 
 void Print_Device_Table()
 {
+	Device_Entry* pointer = *DeviceTable;
+	while(pointer!=NULL){
+		if(pointer->name==*name){
+			return pointer;
+		}
+		pointer = pointer->next;
+	}
 }
 
 
