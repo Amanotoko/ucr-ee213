@@ -55,10 +55,24 @@ void Destroy_Symbol_Table()
 
 void Delete_Node_Table()
 {
+	Node_Entry *p = *NodeTable;
+	while(p!=NULL){
+		Node_Entry *cur = p;
+		p = p->next;
+		free(cur);
+	}
+	free(NodeTable);
 }
 
 void Delete_Device_Table()
 {
+	Device_Entry *p = *DeviceTable;
+	while(p!=NULL){
+		Device_Entry *cur = p;
+		p = p->next;
+		free(cur);
+	}
+	free(DeviceTable);
 }
 
 void Delete_Node_Entry(const char *name)
@@ -137,20 +151,19 @@ Device_Entry* Insert_Device_Entry(const char *name,  const int numnodes,
 
 void Print_Node_Table()
 {
-	printf("NODE TABLE:\n");
+	printf("\nNODE TABLE:\n");
 	Node_Entry *p = *NodeTable;
 	while(p!=NULL){
 		printf("Node name: %s\n",p->name);
 		printf("Node index: %d\n",p->index);
 		p = p->next;
 	}
-	printf("\n");
 }
 
 
 void Print_Device_Table()
 {
-    printf("DEVICE TABLE:\n");
+    printf("\nDEVICE TABLE:\n");
     Device_Entry *p = *DeviceTable;
     while(p!=NULL){
         printf("Device name: %s\n",p->name);
