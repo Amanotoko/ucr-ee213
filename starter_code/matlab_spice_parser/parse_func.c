@@ -51,6 +51,10 @@ void ParseRes(char *name, char *node1, char *node2, double value)
 	Insert_Device_Entry(name,numnodes,nodelist,value);
 }
 
+void ParseIndIC(char *name, char *node1, char *node2, double value, double init){}
+
+void ParseCapIC(char *name, char *node1, char *node2, double value, double init){}
+
 void ParseCap(char *name, char *node1, char *node2, double value)
 {
 	int numnodes = 2;
