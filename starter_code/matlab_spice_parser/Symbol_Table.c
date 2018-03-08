@@ -41,6 +41,9 @@ void Init_Symbol_Tables()
 	DeviceTable = malloc(sizeof(Device_Entry*));
 	NodeTableSize = 0;
 	DeviceTableSize = 0;
+
+	memset(NodeTable, 0, sizeof(Node_Entry*));
+	memset(DeviceTable, 0, sizeof(Device_Entry*));
 }
 
 
@@ -71,9 +74,10 @@ Node_Entry* Lookup_Node_Entry(const char *name)
 {
 	Node_Entry* pointer = *NodeTable;
 	while(pointer!=NULL){
-		//if(pointer->name==*name){
-		//	return pointer;
-		//}
+		char cur_name = pointer->name;
+		if(cur_name==name){
+			return pointer;
+		}
 		pointer = pointer->next;
 	}
 	return NULL;
@@ -84,9 +88,10 @@ Device_Entry* Lookup_Device_Entry(const char *name)
 {
 	Device_Entry* pointer = *DeviceTable;
 	while(pointer!=NULL){
-		//if(pointer->name==*name){
-		//	return pointer;
-		//}
+		char cur_name = pointer->name;
+		if(cur_name==name){
+			return pointer;
+		}
 		pointer = pointer->next;
 	}
 	return NULL;
@@ -99,6 +104,7 @@ Node_Entry* Insert_Node_Entry(const char *name)
 	Node_Entry* new_node = malloc(sizeof(Device_Entry));
 
 	new_node->name = name;
+	new_node->index = 0;
 
 	//first insert new_node and then set the head to new_node
 	new_node->next = *NodeTable;
@@ -125,28 +131,39 @@ Device_Entry* Insert_Device_Entry(const char *name,  const int numnodes,
 	new_device->next = *DeviceTable;
 	*DeviceTable = new_device;
 	DeviceTableSize = DeviceTableSize+1;
-
 	return new_device;
 }
 
 
 void Print_Node_Table()
 {
-	Node_Entry* pointer = *NodeTable;
-	while(pointer!=NULL){
-		printf("hello");
-		pointer = pointer->next;
+	printf("NODE TABLE:\n");
+	Node_Entry *p = *NodeTable;
+	while(p!=NULL){
+		printf("Node name: %s\n",p->name);
+		printf("Node index: %d\n",p->index);
+		p = p->next;
 	}
+	printf("\n");
 }
 
 
 void Print_Device_Table()
 {
-	Device_Entry* pointer = *DeviceTable;
-	while(pointer!=NULL){
-		printf("hi");
-		pointer = pointer->next;
-	}
+    printf("DEVICE TABLE:\n");
+    Device_Entry *p = *DeviceTable;
+    while(p!=NULL){
+        printf("Device name: %s\n",p->name);
+        printf("Device value: %f\n",p->value);
+        printf("Device node number: %i\n",p->numnodes);
+		int node_number = p->numnodes;
+        for(int i=0;i<node_number;i++){
+			printf("Node name: %s   ",p->nodelist[i]->name);
+		}
+		printf("\n");
+		p = p->next;
+    }
+
 }
 
 

@@ -108,9 +108,6 @@ void Create_MNA_Matrix()
 
 void Print_MNA_System()
 {
-	//test
-	Print_Device_Table();
-	Print_Device_Table();
 	int i, j;
 
 	printf("\n\n");
