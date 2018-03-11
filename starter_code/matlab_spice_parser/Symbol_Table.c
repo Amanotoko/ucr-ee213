@@ -77,22 +77,46 @@ void Delete_Device_Table()
 
 void Delete_Node_Entry(const char *name)
 {
+    Node_Entry *p = *NodeTable;
+    if(!strcmp(p->name,name)){
+        *NodeTable = (*NodeTable)->next;
+        NodeTableSize--;
+        return;
+    }
+    while(p!=NULL&&p.next!=NULL){
+        if(!strcmp(p->next->name,name)){
+            p->next = p->next->next;
+            NodeTableSize--;
+        }
+        p = p->next;
+    }
 }
 
 void Delete_Device_Entry(const char *name)
 {
-	// NOT IMPLEMENTED!
+    Device_Entry *p = *DeviceTable;
+    if(!strcmp(p->name,name)){
+        *DeviceTable = (*DeviceTable)->next;
+        DeviceTableSize--;
+        return;
+    }
+    while(p!=NULL&&p.next!=NULL){
+        if(!strcmp(p->next->name,name)){
+            p->next = p->next->next;
+            DeviceTableSize--;
+        }
+        p = p->next;
+    }
 }
 
 Node_Entry* Lookup_Node_Entry(const char *name)
 {
-	Node_Entry* pointer = *NodeTable;
-	while(pointer!=NULL){
-		char cur_name = pointer->name;
-		if(cur_name==name){
-			return pointer;
+	Node_Entry* p = *NodeTable;
+	while(p!=NULL){
+		if(!strcmp(p->name,name)){
+			return p;
 		}
-		pointer = pointer->next;
+		p = p->next;
 	}
 	return NULL;
 }
@@ -100,13 +124,12 @@ Node_Entry* Lookup_Node_Entry(const char *name)
 
 Device_Entry* Lookup_Device_Entry(const char *name)
 {
-	Device_Entry* pointer = *DeviceTable;
-	while(pointer!=NULL){
-		char cur_name = pointer->name;
-		if(cur_name==name){
-			return pointer;
+	Device_Entry* p = *DeviceTable;
+	while(p!=NULL){
+		if(!strcmp(p->name,name)){
+			return p;
 		}
-		pointer = pointer->next;
+		p = p->next;
 	}
 	return NULL;
 }

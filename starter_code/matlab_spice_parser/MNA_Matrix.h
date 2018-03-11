@@ -20,6 +20,7 @@
 
 extern int MatrixSize;	// size of the MNA matrix (i.e., the max dimension)
 extern double **MNAMatrix;
+extern double **MNAMatrix1;
 extern double *RHS;
 
 

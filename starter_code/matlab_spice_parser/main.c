@@ -69,7 +69,7 @@ int main(int argc, char **args)
 	Call_Parser( args[1] );
 
 	dim = Get_Matrix_Size();
-	printf("\ndim = %d", dim);
+	printf("\ndim = %d", (dim+1));
 	
 	A = malloc((dim+1)*(dim+1)*sizeof(double));
 	b = malloc((dim+1)*sizeof(double));
@@ -84,6 +84,7 @@ int main(int argc, char **args)
 	for (i = 0; i < (dim+1); i++)
 		printf("%-8.3f", b[i]);
 
+	printf("\n");
 	return (0);
 }
 
