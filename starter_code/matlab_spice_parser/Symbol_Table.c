@@ -83,7 +83,7 @@ void Delete_Node_Entry(const char *name)
         NodeTableSize--;
         return;
     }
-    while(p!=NULL&&p.next!=NULL){
+    while(p!=NULL&&p->next!=NULL){
         if(!strcmp(p->next->name,name)){
             p->next = p->next->next;
             NodeTableSize--;
@@ -100,7 +100,7 @@ void Delete_Device_Entry(const char *name)
         DeviceTableSize--;
         return;
     }
-    while(p!=NULL&&p.next!=NULL){
+    while(p!=NULL&&p->next!=NULL){
         if(!strcmp(p->next->name,name)){
             p->next = p->next->next;
             DeviceTableSize--;
