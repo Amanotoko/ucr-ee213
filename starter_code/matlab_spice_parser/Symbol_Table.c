@@ -68,14 +68,14 @@ void Delete_Node_Entry(const char *name)
 	Node_Entry *pre=*NodeTable;
 	if(!strcmp(name,pre->name)){
         *NodeTable = (*NodeTable)->next;
-        NodeTableSize--;
+        NodeTableSize=NodeTableSize-1;
         return;
     }
     Node_Entry *cur=pre->next;
 	while(cur!=NULL){
     	if(!strcmp(name,cur->name)){
             pre->next = cur->next;
-            NodeTableSize--;
+            NodeTableSize=NodeTableSize-1;
             break;
         }
         pre=cur;
@@ -89,14 +89,14 @@ void Delete_Device_Entry(const char *name)
 	Device_Entry *pre=*DeviceTable;
 	if(!strcmp(name,pre->name)){
         *DeviceTable = (*DeviceTable)->next;
-        DeviceTableSize--;
+        DeviceTableSize=DeviceTableSize-1;
         return;
     }
     Device_Entry *cur=pre->next;
 	while(cur!=NULL){
     	if(!strcmp(name,cur->name)){
             pre->next = cur->next;
-            DeviceTableSize--;
+            DeviceTableSize=DeviceTableSize-1;
             break;
         }
         pre=cur;
