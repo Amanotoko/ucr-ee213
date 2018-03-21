@@ -19,6 +19,7 @@
 #include <string.h>
 #include "Symbol_Table.h"
 #include "MNA_Matrix.h"
+#include "parse_func.h"
 
 #define WARNING_DIV_BY_ZERO \
 		printf("\nWarning: divide by zero.");
@@ -34,9 +35,22 @@ double *RHS = NULL;
 */
 void Index_All_Nodes()
 {
-	MatrixSize = 3;
-	
+	Node_Entry *n = *NodeTable;
+	for(int i=0;i!=NodeTableSize;i++){
+		n->index = NameHash(n->name,NodeTableSize);
+		n=n->next;
+	}
+	Node_Entry *cur = *NodeTable;
+	int common_node_size=0;
+	while(cur != NULL){
+		if(cur->index>common_node_size)
+			common_node_size=cur->index;
+		cur=cur->next;
+	}
+	MatrixSize=common_node_size+nInd+nVsrc;
 }
+
+
 
 int Get_Matrix_Size()
 {
@@ -68,6 +82,7 @@ void Get_MNA_System(double **A, double **b)
 
 	(!!) Students can try SPARSE matrix format.
 */
+double **MNA_C_Matrix = NULL;
 void Init_MNA_System()
 {
 #if 1
@@ -87,10 +102,29 @@ void Init_MNA_System()
 	// Initialize to zero
 	for (i = 0; i <= MatrixSize; i++) {
 		for (j = 0; j <= MatrixSize; j++) {
-			MNAMatrix[i][j] = 10.0;
+			MNAMatrix[i][j] = 0.0;
 		}
-		RHS[i] = 20.0;
+		RHS[i] = 0.0;
 	}
+
+	if (MatrixSize == 0) {
+		return;
+	}
+
+	MNA_C_Matrix = (double**) malloc( (MatrixSize+1) * sizeof(double*) );
+	for (i = 0; i <= MatrixSize; i++) {
+		MNA_C_Matrix[i] = (double*) malloc( (MatrixSize+1) * sizeof(double) );
+	}
+	for (i = 0; i <= MatrixSize; i++) {
+		for (j = 0; j <= MatrixSize; j++) {
+			MNA_C_Matrix[i][j] = 0.0;
+		}
+	}
+
+	if (MatrixSize == 0) {
+		return;
+	}
+
 #endif
 }
 
@@ -104,6 +138,42 @@ void Init_MNA_System()
 */
 void Create_MNA_Matrix()
 {
+	Device_Entry *n = *DeviceTable;
+    while(n!= NULL){
+		switch(n->name[0]){
+        	case 'R':
+                MNAMatrix[n->nodelist[0]->index][n->nodelist[0]->index] += 1.0/(n->value);
+                MNAMatrix[n->nodelist[1]->index][n->nodelist[1]->index] += 1.0/(n->value);
+                MNAMatrix[n->nodelist[0]->index][n->nodelist[1]->index] -= 1.0/(n->value);
+                MNAMatrix[n->nodelist[1]->index][n->nodelist[0]->index] -= 1.0/(n->value);break;
+            
+            case 'G':   //voltage source
+                MNAMatrix[n->nodelist[0]->index][n->nodelist[2]->index] += (n->value);
+                MNAMatrix[n->nodelist[0]->index][n->nodelist[3]->index] -= (n->value);
+                MNAMatrix[n->nodelist[1]->index][n->nodelist[2]->index] -= (n->value);
+                MNAMatrix[n->nodelist[1]->index][n->nodelist[3]->index] += (n->value);break;
+            
+
+            
+            case 'C':   //capacitor
+                MNA_C_Matrix[n->nodelist[0]->index][n->nodelist[0]->index] += 1.0/(n->value);
+                MNA_C_Matrix[n->nodelist[1]->index][n->nodelist[1]->index] += 1.0/(n->value);
+                MNA_C_Matrix[n->nodelist[0]->index][n->nodelist[1]->index] -= 1.0/(n->value);
+                MNA_C_Matrix[n->nodelist[1]->index][n->nodelist[0]->index] -= 1.0/(n->value);break;
+
+            case 'L': 
+                MNA_C_Matrix[n->nodelist[0]->index][n->nodelist[0]->index] += (n->value);
+                MNA_C_Matrix[n->nodelist[1]->index][n->nodelist[1]->index] += (n->value);
+                MNA_C_Matrix[n->nodelist[0]->index][n->nodelist[1]->index] -= (n->value);
+                MNA_C_Matrix[n->nodelist[1]->index][n->nodelist[0]->index] -= (n->value);break;
+            case 'I': //current source
+                RHS[n->nodelist[0]->index] -= n->value;
+                RHS[n->nodelist[1]->index] += n->value; break;
+
+        };
+
+        n = n->next;
+    }
 }
 
 void Print_MNA_System()
@@ -112,14 +182,14 @@ void Print_MNA_System()
 
 	printf("\n\n");
 	for (j = 0; j <= MatrixSize; j++) {
-		printf("\t%-12d", j);
+		printf("\t%-18d", j);
 	}
 	printf("\tRHS");
 	
 	for (i = 0; i <= MatrixSize; i++) {
 		printf("\n[%-3d]", i);
 		for (j = 0; j <= MatrixSize; j++) {
-			printf("\t%-12f", MNAMatrix[i][j]);
+			printf("\t%-3f+%-3fs", MNAMatrix[i][j],MNA_C_Matrix[i][j]);
 		}
 		printf("\t%-12f", RHS[i]);
 	}
