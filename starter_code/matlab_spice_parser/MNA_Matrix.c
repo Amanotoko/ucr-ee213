@@ -173,6 +173,9 @@ void Print_MNA_System()
 {
 	int i, j;
 
+    FILE *f;
+    f = fopen("MNAmatrix.txt", "a");
+
 	printf("\n\n\t\t\t\t\t\t\tMNA Matrix:\n");
 	for (j = 0; j <= MatrixSize; j++) {
 		printf("\t%-24d", j);
@@ -185,6 +188,23 @@ void Print_MNA_System()
 		}
 		printf("\t%-12f", RHS[i]);
 	}
+
+    for (i = 0; i <= MatrixSize; i++) {
+        for (j = 0; j <= MatrixSize; j++) {
+            fprintf(f,"\t%f", MNAMatrix[i][j]);
+        }
+    }
+    fprintf(f,"\n");
+    for (i = 0; i <= MatrixSize; i++) {
+        for (j = 0; j <= MatrixSize; j++) {
+            fprintf(f,"\t%f", MNAMatrix1[i][j]);
+        }
+    }
+    fprintf(f,"\n");
+    for (i = 0; i <= MatrixSize; i++) {
+        fprintf(f,"\t%f", RHS[i]);
+    }
+    fclose(f);
 }
 
 
