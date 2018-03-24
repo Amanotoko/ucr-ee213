@@ -196,12 +196,6 @@ void Print_MNA_System()
     }
     fprintf(f,"\n");
     for (i = 0; i <= MatrixSize; i++) {
-        for (j = 0; j <= MatrixSize; j++) {
-            fprintf(f,"\t%f", MNAMatrix1[i][j]);
-        }
-    }
-    fprintf(f,"\n");
-    for (i = 0; i <= MatrixSize; i++) {
         fprintf(f,"\t%f", RHS[i]);
     }
     fclose(f);

@@ -2,15 +2,14 @@ import numpy as np
 import math
 
 global mna
-global mna_1
 global rhs
 global size
 
 def parse_MNA_matrix():
 
     global mna
-    global mna_1
     global rhs
+    global res
     global size
 
     file = open("MNAmatrix.txt","r")
@@ -22,13 +21,8 @@ def parse_MNA_matrix():
         if count == 0:
             size = int(math.sqrt(len(elements)))
             mna = np.reshape(elements,(size,size))
-            print(mna)
-        elif count == 1:
-            mna_1 = np.reshape(elements, (size, size))
-            print(mna_1)
         else:
             rhs = np.reshape(elements, (size, 1))
-            print(rhs)
         count = count + 1
 
 def parse_float(arr):
@@ -40,21 +34,19 @@ def parse_float(arr):
 def mna_calculator():
 
     global mna
-    global mna_1
     global rhs
-    global size
-
-    res = np.linalg.solve(mna, rhs)
-    print(res)
-
+    global res
+    res = None
     try:
-        res_1 = np.linalg.solve(mna_1,rhs)
+        res = np.linalg.solve(mna, rhs)
     except:
-        print("no solution")
+        print("No Solution")
+    return res
 
-    
+def run():
+    parse_MNA_matrix()
+    print(mna_calculator())
 
 
-parse_MNA_matrix()
-mna_calculator()
+run()
 
