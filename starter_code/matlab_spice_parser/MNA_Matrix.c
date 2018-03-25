@@ -174,7 +174,7 @@ void Print_MNA_System()
 	int i, j;
 
     FILE *f;
-    f = fopen("MNAmatrix.txt", "a");
+    f = fopen("MNAmatrix.txt", "w");
 
 	printf("\n\n\t\t\t\t\t\t\tMNA Matrix:\n");
 	for (j = 0; j <= MatrixSize; j++) {
