@@ -31,7 +31,7 @@ def parse_float(arr):
         res.append(float(element))
     return res
 
-def mna_calculator():
+def mna_calculator_freq():
 
     global mna
     global rhs
@@ -39,14 +39,16 @@ def mna_calculator():
     res = None
     try:
         res = np.linalg.solve(mna, rhs)
-    except:
+    except e:
         print("No Solution")
+        print(e)
     return res
 
 def run():
     parse_MNA_matrix()
-    print(mna_calculator())
-
+    print("Freq:")
+    print("MNA: "+str(mna))
+    print("RHS: "+str(rhs))
+    print("RES: "+str(mna_calculator_freq()))
 
 run()
-
