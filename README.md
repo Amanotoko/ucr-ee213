@@ -1,30 +1,22 @@
-# UCR EE 213 Fall 16
+# UCR EE 213 Fall 16 Haopeng Liu
 
----
+Modified parse_func.c Symbol_Table.c MNA_Matrix.c MNA_matrix.h main.c
 
-This is a repository for final project submission.
+Modified the testcase into 4 tests, to cover all the conditions.
 
----
+Use:
 
-### Step 1: Fork this repo
+1.clone repo: git clone git@github.com:haopengliu/ucr-ee213.git
 
-In the top-right corner of the page, click **Fork**. 
-![fork](https://help.github.com/assets/images/help/repository/fork_button.jpg)
+2.cd <your_path>/ucr-ee213/starter_code/matlab_spice_parser
 
-### Step 2: Create a local clone of your fork
-```
-$ git clone https://github.com/YOUR-USERNAME/ucr-ee213
-```
+3.make
 
-### Step 3: Create your work directory under project/
-```
-$ mkdir project/YOUR-NETID
-```
 
-You can copy the starter-code into your work directory and work on it.
-DO NOT change anything elsewhere.
+Test:
 
-### Step 4: Submit your project
+You can either create your own test cases or use my test cases:
 
-Make sure you didn't change anything outside your work directory.
-Click the green button **New Pull Request**.
+let's say run test1.sp
+
+./runparse ~/<your_path>/ucr-ee213/netlist/test1.sp
