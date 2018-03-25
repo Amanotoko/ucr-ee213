@@ -1,5 +1,34 @@
+How to compile and run my code! (under Ubuntu/ee-213/starter_code/matlab_spice_parser)
+
+Step1	$ rm Symbol_Table.o main.o MNA_Matrix.o parse_func.o
+(If you change any code under this folder, it's better to delete all .o files and complie again.)
+
+Step2	$ make
+(Compile)
+
+Step3	$./runparse netlist_t1.sp
+(netlist_t1.sp needs to be placed under /matlab_spice_parser)
+
+
+
+
+
+Please also read ee213_final project_Lab record(实验记录)-Yibo Liu.pdf.  
+This pdf records how to solve possible errors while compiling the project under ubuntu.
+
+
+
+
+
+
+
+
+
+
+
+*****************************************************************************************************
 README - a brief documentation on the package (student version)
-Jan. 2015
+March. 2018
 by Guoyong SHI: shiguoyong@ic.sjtu.edu.cn
 
 This circuit parser provides an interface to MATLAB so that students can
