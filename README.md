@@ -11,4 +11,6 @@ What I do in the project:
 
 The folder of 'netlist' contains a test file.
 
-Folder 'starter-code' contains all the execution code. Further instuction is included to run the code.
+Folder 'starter-code' contains all the execution code for paerser. Further instuction is included to run the code.
+
+'Time analysis.zip' and 'frequency analysis.zip' are Matlab files with corresponding input data from parser. You can use your own data from parser. 
