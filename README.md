@@ -1,30 +1,16 @@
-# UCR EE 213 Fall 16
+# UCR EE 213 winter 2018: Computer-Aided Electronic Circuit Simulation
+This is a repository for EE213 final project.
 
----
+The framework of starter-code in my work directory if forked form:  https://github.com/sheldonucr/ucr-ee213
 
-This is a repository for final project submission.
+What I do in the project:
+1. Finish all parser-related files in starter-code, so that the parser can parse the input circuit and generate a pre-simulate file for Matlab for further simulation.
+2. Create a MNA time-domain analysis in Matlab.
+3. Create a MNA frequency-domain analysis in Matlab.
 
----
 
-### Step 1: Fork this repo
+The folder of 'netlist' contains a test file.
 
-In the top-right corner of the page, click **Fork**. 
-![fork](https://help.github.com/assets/images/help/repository/fork_button.jpg)
+Folder 'starter-code' contains all the execution code for paerser. Further instuction is included to run the code.
 
-### Step 2: Create a local clone of your fork
-```
-$ git clone https://github.com/YOUR-USERNAME/ucr-ee213
-```
-
-### Step 3: Create your work directory under project/
-```
-$ mkdir project/YOUR-NETID
-```
-
-You can copy the starter-code into your work directory and work on it.
-DO NOT change anything elsewhere.
-
-### Step 4: Submit your project
-
-Make sure you didn't change anything outside your work directory.
-Click the green button **New Pull Request**.
+'Time analysis.zip' and 'frequency analysis.zip' are Matlab files with corresponding input data from parser. You can use your own data from parser. 
